@@ -80,6 +80,7 @@ class RegisterController extends Controller
       $user=User::create([
           'name' => $request['name'],
           'email' => $request['email'],
+          'phone_number'=>$request['phone_number'],
           'password' => Hash::make($request['password']),
           'api_token' => hash('sha256',$token),
       ]);
