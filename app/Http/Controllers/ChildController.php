@@ -102,7 +102,10 @@ class ChildController extends Controller
         //
         if($child_id->parent_id==\Auth::user()->id){
           $child_id->delete();
+          return ["status"=>"deleted"];
+        }else{
+          return ["error"=>"unauthorised"];
         }
-        return ["status"=>"deleted"];
+
     }
 }

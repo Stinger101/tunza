@@ -15,6 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
         //
+        return Category::where("parent_id",\Auth::user()->id)->get();
     }
 
     /**
@@ -36,6 +37,11 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+        $category=Category::create([
+          "name"=>$request["name"],
+          "parent_id"=>\Auth::user()->id
+        ]);
+        return $category;
     }
 
     /**
@@ -44,9 +50,10 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(Category $category_id)
     {
         //
+        return $category_id;
     }
 
     /**
@@ -67,9 +74,12 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Category $category_id)
     {
         //
+        $category_id->name=$request["name"];
+        $category_id->update();
+        return $category_id;
     }
 
     /**
@@ -78,8 +88,14 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category_id)
     {
         //
+        if($category_id->parent_id==\Auth::user()->id){
+          $category_id->delete();
+          return ["status"=>"deleted"];
+        }else{
+          return ["error"=>"unauthorised"];
+        }
     }
 }
