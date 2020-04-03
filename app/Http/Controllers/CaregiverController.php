@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Caregiver;
 use Illuminate\Http\Request;
+use App\Child;
 
 class CaregiverController extends Controller
 {
@@ -12,10 +13,10 @@ class CaregiverController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($child_id)
     {
         //
-        return Caregiver::all();
+        return Child::where("id",$child_id)->caregivers;
     }
 
     /**
@@ -34,9 +35,36 @@ class CaregiverController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$child_id)
     {
         //
+        // TODO: check if user is registered on system
+        if(\App\User::where("email",$request->email_provided)->count()>0){
+          return Caregiver::create([
+            "is_active"=>true,
+            "invited_on"=>\Carbon\Carbon::now(),
+            "is_registered"=>true,
+            "email_provided"=>$request->email_provided,
+            "user_id"=>\App\User::where("email",$request->email_provided)->get()[0]["user_id"],
+            "parent_id"=>\Auth::user()->id,
+            "child_id"=>$child_id,
+            "category_id"=>$request->category_id
+          ]);
+        }else{
+          return Caregiver::create([
+            "is_active"=>true,
+            "invited_on"=>\Carbon\Carbon::now(),
+            "is_registered"=>false,
+            "email_provided"=>$request->email_provided,
+            "parent_id"=>\Auth::user()->id,
+            "child_id"=>$child_id,
+            "category_id"=>$request->category_id
+          ]);
+        }
+        // TODO: add email functionality and controller to handle invites
+        // processing i.e. when they register on the system using the link or
+        //in some other way they are updated as registered and user_id is set for all
+
     }
 
     /**
@@ -45,9 +73,10 @@ class CaregiverController extends Controller
      * @param  \App\Caregiver  $caregiver
      * @return \Illuminate\Http\Response
      */
-    public function show(Caregiver $caregiver)
+    public function show(Caregiver $caregiver_id)
     {
         //
+        return $caregiver_id;
     }
 
     /**
@@ -68,9 +97,30 @@ class CaregiverController extends Controller
      * @param  \App\Caregiver  $caregiver
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Caregiver $caregiver)
+    public function update(Request $request, Caregiver $caregiver_id)
     {
         //
+        // TODO: find out how to use this method
+        if(isset($request["is_active"])){
+          $caregiver_id->is_active=$request->is_active;
+        }
+        if(isset($request["status_changed_on"])){
+          $caregiver_id->status_changed_on=$request->status_changed_on;
+        }
+        if(isset($request["user_id"])){
+          $caregiver_id->user_id=$request->user_id;
+        }
+        if(isset($request["is_registered"])){
+          $caregiver_id->is_registered=$request->is_registered;
+        }
+        if(isset($request["category_id"])){
+          $caregiver_id->category_id=$request->category_id;
+        }
+          $caregiver_id->update();
+
+          return $caregiver_id;
+
+
     }
 
     /**
@@ -79,8 +129,10 @@ class CaregiverController extends Controller
      * @param  \App\Caregiver  $caregiver
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Caregiver $caregiver)
+    public function destroy(Caregiver $caregiver_id)
     {
         //
+        $caregiver_id->delete();
+        return ["status"=>"deleted"];
     }
 }

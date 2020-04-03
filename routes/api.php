@@ -35,15 +35,8 @@ Route::middleware('auth:api')->get('/user/category/{category_id}','CategoryContr
 Route::middleware('auth:api')->post('/user/category/{category_id}/update', 'CategoryController@update');
 Route::middleware('auth:api')->post('/user/category/{category_id}/delete', 'CategoryController@destroy');
 
-Route::middleware('auth:api')->post('/user/child/{child_id}/add_caregiver', function (Request $request) {
-    return $request->user();
-});
-Route::middleware('auth:api')->get('/user/child/{child_id}/caregivers', function (Request $request) {
-    return $request->user();
-});
-Route::middleware('auth:api')->get('/user/child/{child_id}/caregiver/{caregiver_id}', function (Request $request) {
-    return $request->user();
-});
-Route::middleware('auth:api')->post('/user/child/{child_id}/caregiver/{caregiver_id}/update', function (Request $request) {
-    return $request->user();
-});
+Route::middleware('auth:api')->post('/user/child/{child_id}/add_caregiver', "CaregiverController@store");
+Route::middleware('auth:api')->get('/user/child/{child_id}/caregivers', "CaregiverController@index");
+Route::middleware('auth:api')->get('/user/child/{child_id}/caregiver/{caregiver_id}', "CaregiverController@show");
+Route::middleware('auth:api')->post('/user/child/{child_id}/caregiver/{caregiver_id}/update', "CaregiverController@update");
+Route::middleware('auth:api')->post('/user/child/{child_id}/caregiver/{caregiver_id}/delete', "CaregiverController@destroy");

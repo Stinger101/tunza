@@ -15,12 +15,13 @@ class CreateCaregiversTable extends Migration
     {
         Schema::create('caregivers', function (Blueprint $table) {
             $table->id();
-            $table->boolean("is_active");
+            $table->boolean("is_active")->nullable();
+            $table->boolean("status")->nullable();
             $table->dateTime("invited_on");
-            $table->dateTime("accepted_on");
+            $table->dateTime("status_changed_on")->nullable();
             $table->boolean("is_registered");
             $table->string("email_provided");
-            $table->bigInteger("user_id")->unsigned();
+            $table->bigInteger("user_id")->unsigned()->nullable();
             $table->bigInteger("parent_id")->unsigned();
             $table->bigInteger("child_id")->unsigned();
             $table->bigInteger("category_id")->unsigned();
