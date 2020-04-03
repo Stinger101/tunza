@@ -104,9 +104,11 @@ class CaregiverController extends Controller
         if(isset($request["is_active"])){
           $caregiver_id->is_active=$request->is_active;
         }
-        if(isset($request["status_changed_on"])){
-          $caregiver_id->status_changed_on=$request->status_changed_on;
+        if(isset($request["status"])){
+          $caregiver_id->status=$request->status;
+          $caregiver_id->status_changed_on=\Carbon\Carbon::now();
         }
+
         if(isset($request["category_id"])){
           $caregiver_id->category_id=$request->category_id;
         }
