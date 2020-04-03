@@ -107,12 +107,6 @@ class CaregiverController extends Controller
         if(isset($request["status_changed_on"])){
           $caregiver_id->status_changed_on=$request->status_changed_on;
         }
-        if(isset($request["user_id"])){
-          $caregiver_id->user_id=$request->user_id;
-        }
-        if(isset($request["is_registered"])){
-          $caregiver_id->is_registered=$request->is_registered;
-        }
         if(isset($request["category_id"])){
           $caregiver_id->category_id=$request->category_id;
         }
