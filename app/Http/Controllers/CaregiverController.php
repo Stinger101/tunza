@@ -73,7 +73,7 @@ class CaregiverController extends Controller
      * @param  \App\Caregiver  $caregiver
      * @return \Illuminate\Http\Response
      */
-    public function show(Caregiver $caregiver_id)
+    public function show(\App\Child $child_id,Caregiver $caregiver_id)
     {
         //
         return $caregiver_id;
@@ -125,7 +125,7 @@ class CaregiverController extends Controller
      * @param  \App\Caregiver  $caregiver
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Caregiver $caregiver_id)
+    public function destroy(\App\Child $child_id,Caregiver $caregiver_id)
     {
         //
         $caregiver_id->delete();
