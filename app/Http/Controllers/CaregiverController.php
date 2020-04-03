@@ -16,7 +16,7 @@ class CaregiverController extends Controller
     public function index($child_id)
     {
         //
-        return Child::where("id",$child_id)->caregivers;
+        return Child::where("id",$child_id)->caregivers()->get();
     }
 
     /**
