@@ -97,7 +97,7 @@ class CaregiverController extends Controller
      * @param  \App\Caregiver  $caregiver
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Caregiver $caregiver_id)
+    public function update(Request $request, \App\Child $child_id,Caregiver $caregiver_id)
     {
         //
         // TODO: find out how to use this method
