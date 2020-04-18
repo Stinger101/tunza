@@ -20,3 +20,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::middleware('auth:api')->get('/avatar/users/{path_to_file}', function (Request $request,$path_to_file) {
+  if(\Auth::user()->id==$path_to_file){
+    return response()->file(storage_path('app/avatar/users/').$path_to_file);
+  }else{
+    abort(403, 'Unauthorized action.');
+  }
+
+});

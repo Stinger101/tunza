@@ -84,9 +84,13 @@ class RegisterController extends Controller
           'password' => Hash::make($request['password']),
           'api_token' => hash('sha256',$token),
       ]);
+      if(isset($request["avatar"])){
+        $user->avatar_url=$request->file('avatar')->storeAs('avatar/users',$user->id);
+        $user->update();
+      }
       if(\App\Caregiver::where("email_provided",$request['email'])->count()>0){
         foreach (\App\Caregiver::where("email_provided",$request['email'])->get() as $caregiver) {
-          // 
+          //
             $caregiver->user_id=$user->id;
             $caregiver->is_registered=true;
             $caregiver->update();
