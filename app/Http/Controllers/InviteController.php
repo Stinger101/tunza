@@ -45,10 +45,10 @@ class InviteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Caregiver $invite_id)
+    public function show($invite_id)
     {
         //
-        return $invite_id->with(["parent:id,name","child:id,name"]);
+        return Caregiver::where("id",$invite_id)->with(["parent:id,name","child:id,name"])->get()[0];
     }
 
     /**
