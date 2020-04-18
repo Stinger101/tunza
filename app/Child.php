@@ -12,4 +12,7 @@ class Child extends Model
     public function caregivers(){
       return $this->hasMany("App\Caregiver","child_id");
     }
+    public function basicInfo(){
+      return $this->hasMany("App\BasicInfo","child_id");  
+    }
 }

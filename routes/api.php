@@ -40,3 +40,9 @@ Route::middleware('auth:api')->get('/user/child/{child_id}/caregivers', "Caregiv
 Route::middleware('auth:api')->get('/user/child/{child_id}/caregiver/{caregiver_id}', "CaregiverController@show");
 Route::middleware('auth:api')->post('/user/child/{child_id}/caregiver/{caregiver_id}/update', "CaregiverController@update");
 Route::middleware('auth:api')->post('/user/child/{child_id}/caregiver/{caregiver_id}/delete', "CaregiverController@destroy");
+
+Route::middleware('auth:api')->post('/user/child/{child_id}/add_basicinfo', "BasicInfoController@store");
+Route::middleware('auth:api')->get('/user/child/{child_id}/basicinfos', "BasicInfoController@index");
+Route::middleware('auth:api')->get('/user/child/{child_id}/basicinfo/{basicinfo_id}', "BasicInfoController@show");
+Route::middleware('auth:api')->post('/user/child/{child_id}/basicinfo/{basicinfo_id}/update', "BasicInfoController@update");
+Route::middleware('auth:api')->post('/user/child/{child_id}/basicinfo/{basicinfo_id}/delete', "BasicInfoController@destroy");
