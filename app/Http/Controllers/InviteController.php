@@ -45,9 +45,10 @@ class InviteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Caregiver $invite_id)
     {
         //
+        return $invite_id->with(["parent:id,name","child:id,name"])->get();
     }
 
     /**
@@ -68,9 +69,16 @@ class InviteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Caregiver $invite_id)
     {
         //
+        if(isset($request["status"])){
+          $invite_id->status=$request->status;
+          $invite_id->status_changed_on=\Carbon\Carbon::now();
+        }
+        $invite_id->update();
+
+        return $invite_id;
     }
 
     /**
