@@ -48,7 +48,12 @@ class InviteController extends Controller
     public function show($invite_id)
     {
         //
-        return Caregiver::where("id",$invite_id)->with(["parent:id,name","child:id,name"])->get()[0];
+        if(Caregiver::find($invite_id)->user_id==\Auth::user()->id){
+          return Caregiver::where("id",$invite_id)->with(["parent:id,name","child:id,name"])->get()[0];
+        }else{
+          abort(403, 'Unauthorized action.');
+        }
+
     }
 
     /**
@@ -72,13 +77,18 @@ class InviteController extends Controller
     public function update(Request $request, Caregiver $invite_id)
     {
         //
-        if(isset($request["status"])){
-          $invite_id->status=$request->status;
-          $invite_id->status_changed_on=\Carbon\Carbon::now();
-        }
-        $invite_id->update();
+        if($invite_id->user_id==\Auth::user()->id){
+          if(isset($request["status"])){
+            $invite_id->status=$request->status;
+            $invite_id->status_changed_on=\Carbon\Carbon::now();
+          }
+          $invite_id->update();
 
-        return $invite_id;
+          return $invite_id;
+        }else{
+          abort(403, 'Unauthorized action.');
+        }
+
     }
 
     /**
