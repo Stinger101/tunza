@@ -48,7 +48,7 @@ class InviteController extends Controller
     public function show(Caregiver $invite_id)
     {
         //
-        return $invite_id->with(["parent:id,name","child:id,name"])->get();
+        return $invite_id->with(["parent:id,name","child:id,name"]);
     }
 
     /**
