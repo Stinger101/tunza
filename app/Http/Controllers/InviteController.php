@@ -15,7 +15,7 @@ class InviteController extends Controller
     public function index()
     {
         //
-        return Caregiver::where("email_provided",\Auth::user()->email)->where("status",null)->with("child")->get();
+        return Caregiver::where("email_provided",\Auth::user()->email)->where("status",null)->with(["parent","child"])->get();
     }
 
     /**

@@ -14,4 +14,7 @@ class Caregiver extends Model
     public function child(){
       return $this->belongsTo("App\Child","child_id");
     }
+    public function parent(){
+      return $this->belongsTo("App\User","parent_id");
+    }
 }
