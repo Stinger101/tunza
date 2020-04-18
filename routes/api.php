@@ -48,8 +48,8 @@ Route::middleware('auth:api')->post('/user/child/{child_id}/basicinfo/{basicinfo
 Route::middleware('auth:api')->post('/user/child/{child_id}/basicinfo/{basicinfo_id}/delete', "BasicInfoController@destroy");
 
 Route::middleware('auth:api')->get('/caregiver/invites','InviteController@index');
-Route::middleware('auth:api')->get('/caregiver/invites/{invite_id}','InviteController@show');
-Route::middleware('auth:api')->post('/caregiver/invites/{invite_id}/update','InviteController@update');
+Route::middleware('auth:api')->get('/caregiver/invite/{invite_id}','InviteController@show');
+Route::middleware('auth:api')->post('/caregiver/invite/{invite_id}/update','InviteController@update');
 
 Route::middleware('auth:api')->get('/caregiver/children', 'ChildController@index');
 Route::middleware('auth:api')->get('/caregiver/child/{child_id}','ChildController@show');
