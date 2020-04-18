@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Child;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 
 class ChildController extends Controller
 {
