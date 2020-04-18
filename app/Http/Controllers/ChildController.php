@@ -22,6 +22,8 @@ class ChildController extends Controller
             })->get();
         }else if(explode("/",request()->path())[1]=="user"){
           return Child::where("parent_id",\Auth::user()->id)->get();
+        }else{
+          abort(403, 'Unauthorized action.');
         }
 
     }
@@ -67,7 +69,7 @@ class ChildController extends Controller
         if(\Auth::user()->id==$child_id->parent_id || \App\Caregiver::where("user_id",\Auth::user()->id)->where("child_id",$child_id->id)->count()){
           return $child_id;
         }else{
-          return ["error"=>"unauthorised"];
+          abort(403, 'Unauthorized action.');
         }
 
     }
@@ -93,10 +95,15 @@ class ChildController extends Controller
     public function update(Request $request, Child $child_id)
     {
         //
-        $child_id->name=$request["name"];
-        $child_id->date_of_birth=$request["date_of_birth"];
-        $child=$child_id->update();
-        return Child::find($child);
+        if($child_id->parent_id==\Auth::user()->id){
+          $child_id->name=$request["name"];
+          $child_id->date_of_birth=$request["date_of_birth"];
+          $child=$child_id->update();
+          return Child::find($child);
+        }else{
+          abort(403, 'Unauthorized action.');
+        }
+
     }
 
     /**
@@ -112,7 +119,7 @@ class ChildController extends Controller
           $child_id->delete();
           return ["status"=>"deleted"];
         }else{
-          return ["error"=>"unauthorised"];
+          abort(403, 'Unauthorized action.');
         }
 
     }
