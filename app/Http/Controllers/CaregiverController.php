@@ -40,6 +40,15 @@ class CaregiverController extends Controller
         //
         // TODO: check if user is registered on system
         if(\App\User::where("email",$request->email_provided)->count()>0){
+          $user=\App\User::where("email",$request->email_provided)->get()[0];
+          if($user->userrole==null){
+            \App\UserRole::create({"user_id"=$user->id,"role_id"=>2});
+          }else{
+            if($user->userrole->role_id==1){
+              $user->userrole->role_id=3;
+              $user->userrole->update();
+            }
+          }
           return Caregiver::create([
             "is_active"=>true,
             "invited_on"=>\Carbon\Carbon::now(),
@@ -50,6 +59,7 @@ class CaregiverController extends Controller
             "child_id"=>$child_id,
             "category_id"=>$request->category_id
           ]);
+
         }else{
           return Caregiver::create([
             "is_active"=>true,

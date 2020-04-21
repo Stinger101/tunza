@@ -52,7 +52,7 @@ class LoginController extends Controller
                 'api_token' => hash('sha256', $token),
             ])->save();
 
-            return ['token' => $token];
+            return ['token' => $token,"role"=>Auth::user()->userrole!=null?Auth::user()->userrole->role_id:1];
         }else{
           return ['error'=>"wrong credentials"];
         }

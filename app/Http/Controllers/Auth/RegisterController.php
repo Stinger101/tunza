@@ -94,12 +94,16 @@ class RegisterController extends Controller
             $caregiver->user_id=$user->id;
             $caregiver->is_registered=true;
             $caregiver->update();
+
         }
+        \App\UserRole::create({"user_id"=$user->id,"role_id"=>2});
+      }else{
+        \App\UserRole::create({"user_id"=$user->id,"role_id"=>1});
       }
       $credentials = $request->only('email', 'password');
 
       if (Auth::attempt($credentials)) {
-        return ['token' => $token];
+        return ['token' => $token,"role"=>Auth::user()->userrole->role_id];
       }else{
         return ["error"=>"Could not log in user. Please retry."];
       }

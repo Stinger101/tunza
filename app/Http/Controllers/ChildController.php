@@ -15,10 +15,10 @@ class ChildController extends Controller
      */
     public function index()
     {
-        //// TODO: allow for caregivers to view children
+        //// TODO: allow for caregivers to only children where status = 1 and is_active =1
         if(explode("/",request()->path())[1]=="caregiver"){
           return Child::whereHas("caregivers",function (Builder $query) {
-              $query->where('user_id', \Auth::user()->id);
+              $query->where('user_id', \Auth::user()->id)->where("status",1)->where("is_active",1);
             })->get();
         }else if(explode("/",request()->path())[1]=="user"){
           return Child::where("parent_id",\Auth::user()->id)->get();
