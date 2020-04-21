@@ -115,7 +115,7 @@ class CaregiverController extends Controller
           $caregiver_id->is_active=$request->is_active;
         }
         if(isset($request["status"])){
-          $caregiver_id->status=$request->status;
+          $caregiver_id->status=$request->status=="1"?1:$request->status=="0"?0:null;
           $caregiver_id->status_changed_on=\Carbon\Carbon::now();
         }
 
