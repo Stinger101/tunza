@@ -42,7 +42,7 @@ class CaregiverController extends Controller
         if(\App\User::where("email",$request->email_provided)->count()>0){
           $user=\App\User::where("email",$request->email_provided)->get()[0];
           if($user->userrole==null){
-            \App\UserRole::create({"user_id"=>$user->id,"role_id"=>2});
+            \App\UserRole::create(["user_id"=>$user->id,"role_id"=>2]);
           }else{
             if($user->userrole->role_id==1){
               $user->userrole->role_id=3;

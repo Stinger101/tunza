@@ -96,9 +96,9 @@ class RegisterController extends Controller
             $caregiver->update();
 
         }
-        \App\UserRole::create({"user_id"=>$user->id,"role_id"=>2});
+        \App\UserRole::create(["user_id"=>$user->id,"role_id"=>2]);
       }else{
-        \App\UserRole::create({"user_id"=>$user->id,"role_id"=>1});
+        \App\UserRole::create(["user_id"=>$user->id,"role_id"=>1]);
       }
       $credentials = $request->only('email', 'password');
 
