@@ -54,7 +54,7 @@ class LoginController extends Controller
 
             return ['token' => $token,"role"=>Auth::user()->userrole!=null?Auth::user()->userrole->role_id:1];
         }else{
-          return ['error'=>"wrong credentials"];
+          abort(403, 'Authentication error.');
         }
     }
 }
