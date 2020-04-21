@@ -79,6 +79,7 @@ class InviteController extends Controller
         //
         if($invite_id->email_provided==\Auth::user()->email){
           if(isset($request["status"])){
+            $invite_id->user_id=\Auth::user()->id;
             $invite_id->status=$request->status;
             $invite_id->status_changed_on=\Carbon\Carbon::now();
           }
