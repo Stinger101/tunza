@@ -40,13 +40,13 @@ class BasicInfoController extends Controller
     {
         //
         if(\Auth::user()->id == $child_id->parent_id){
-          $basicInfo = BasicInfo::create({
+          $basicInfo = BasicInfo::create([
             "child_id"=>$child_id->id,
             "editor_id"=>\Auth::user()->id,
             "topic"=>$request->topic,
             "content"=>$request->content,
             "visibility"=>$request->visibility
-          });
+          ]);
           if(isset($request->attachment)){
             $basicInfo->attachment=$request->file('attachment')->storeAs('attachments/basicInfo',$basicInfo->id);
             $basicInfo->update();
