@@ -76,7 +76,7 @@ class CaregiverController extends Controller
 
         dispatch(function () use($request,$invite) {
           Mail::to($request->email_provided)->send(new CaregiverInvite($invite,\Auth::user()));
-        })->afterResponse();
+        });
 
         return $invite;
 
