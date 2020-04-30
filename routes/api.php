@@ -47,6 +47,19 @@ Route::middleware('auth:api')->get('/user/child/{child_id}/basicinfo/{basicinfo_
 Route::middleware('auth:api')->post('/user/child/{child_id}/basicinfo/{basicinfo_id}/update', "BasicInfoController@update");
 Route::middleware('auth:api')->post('/user/child/{child_id}/basicinfo/{basicinfo_id}/delete', "BasicInfoController@destroy");
 
+
+Route::middleware('auth:api')->post('/user/child/{child_id}/add_topic', "TopicController@store");
+Route::middleware('auth:api')->get('/user/child/{child_id}/topics', "TopicController@index");
+Route::middleware('auth:api')->get('/user/child/{child_id}/topic/{topic_id}', "TopicController@show");
+Route::middleware('auth:api')->post('/user/child/{child_id}/topic/{topic_id}/update', "TopicController@update");
+Route::middleware('auth:api')->post('/user/child/{child_id}/topic/{topic_id}/delete', "TopicController@destroy");
+
+Route::middleware('auth:api')->post('/user/child/{child_id}/topic/{topic_id}/add_comment', "CommentController@store");
+Route::middleware('auth:api')->get('/user/child/{child_id}/topic/{topic_id}/comments', "CommentController@index");
+Route::middleware('auth:api')->get('/user/child/{child_id}/topic/{topic_id}/comment/{comment_id}', "CommentController@show");
+Route::middleware('auth:api')->post('/user/child/{child_id}/topic/{topic_id}/comment/{comment_id}/update', "CommentController@update");
+Route::middleware('auth:api')->post('/user/child/{child_id}/topic/{topic_id}/comment/{comment_id}/delete', "CommentController@destroy");
+
 Route::middleware('auth:api')->get('/caregiver/invites','InviteController@index');
 Route::middleware('auth:api')->get('/caregiver/invite/{invite_id}','InviteController@show');
 Route::middleware('auth:api')->post('/caregiver/invite/{invite_id}/update','InviteController@update');

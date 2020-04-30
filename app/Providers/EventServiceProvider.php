@@ -18,6 +18,18 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        "App\Events\CallMade"=>[
+          "App\Listeners\SendCallLink"
+        ],
+        "App\Events\CallMissed"=>[
+          "App\Listeners\DestroyCallSession"
+        ],
+        "App\Events\CallReceived"=>[
+          "App\Listeners\SetTimeStartedField"
+        ],
+        "App\Events\CallEnded"=>[
+          "App\Listeners\SetTimeEndedField"
+        ],
     ];
 
     /**

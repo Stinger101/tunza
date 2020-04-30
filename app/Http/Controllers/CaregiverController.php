@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Caregiver;
 use Illuminate\Http\Request;
 use App\Child;
+use App\Mail\CaregiverInvite;
+use Illuminate\Support\Facades\Mail;
 
 class CaregiverController extends Controller
 {
@@ -49,7 +51,7 @@ class CaregiverController extends Controller
               $user->userrole->update();
             }
           }
-          return Caregiver::create([
+          $invite=Caregiver::create([
             "is_active"=>true,
             "invited_on"=>\Carbon\Carbon::now(),
             "is_registered"=>true,
@@ -61,7 +63,7 @@ class CaregiverController extends Controller
           ]);
 
         }else{
-          return Caregiver::create([
+          $invite= Caregiver::create([
             "is_active"=>true,
             "invited_on"=>\Carbon\Carbon::now(),
             "is_registered"=>false,
@@ -71,9 +73,12 @@ class CaregiverController extends Controller
             "category_id"=>$request->category_id
           ]);
         }
-        // TODO: add email functionality and controller to handle invites
-        // processing i.e. when they register on the system using the link or
-        //in some other way they are updated as registered and user_id is set for all
+
+        dispatch(function () {
+          Mail::to($request->email_provided)->send(new CaregiverInvite($invite,\Auth::user()));
+        })->afterResponse();
+
+        return $invite;
 
     }
 
