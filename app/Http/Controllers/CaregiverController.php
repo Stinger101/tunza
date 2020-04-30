@@ -73,9 +73,11 @@ class CaregiverController extends Controller
             "category_id"=>$request->category_id
           ]);
         }
+        $email=$request->email_provided;
+        $user=\Auth::user();
 
-        dispatch(function () use($request,$invite) {
-          Mail::to($request->email_provided)->send(new CaregiverInvite($invite,\Auth::user()));
+        dispatch(function () use ($email,$invite,$user) {
+          Mail::to($email)->send(new CaregiverInvite($invite,$user));
         });
 
         return $invite;
