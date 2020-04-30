@@ -6,6 +6,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use App\User;
+use App\Caregiver;
 
 class CaregiverInvite extends Mailable
 {
@@ -17,7 +19,7 @@ class CaregiverInvite extends Mailable
      *
      * @return void
      */
-    public function __construct($invite,$user)
+    public function __construct(Caregiver $invite,User $user)
     {
         $this->user=$user;
         $this->invite=$invite;
