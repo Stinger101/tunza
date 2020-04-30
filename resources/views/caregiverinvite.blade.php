@@ -1,4 +1,4 @@
-component('mail::message')
+@component('mail::message')
 # Invite to be a caregiver
 
 You have been invited on Tunza app by {{$user->name}} to be a caregiver for {{$invite->child->name}}. Please login to the application to accept the invite.
