@@ -17,6 +17,14 @@ Route::post("/register",'Auth\RegisterController@apiCreate');
 
 Route::post("/login",'Auth\LoginController@apiAuthenticate');
 
+Route::middleware('auth:api')->post('/broadcast/auth',(Request $request){
+  if(!\Auth::check()){
+    return new Response("Forbidden",403);
+  }
+  $pusher = new Pusher\Pusher(env('PUSHER_APP_KEY'),env('PUSHER_APP_SECRET'), env('PUSHER_APP_ID'));
+  return $pusher->socket_auth($request->request->get('channel_name'),$request->request->get('socket_id')); 
+});
+
 Route::middleware('auth:api')->get('/user','UserController@show');
 //child
 Route::middleware('auth:api')->post('/user/add_child','ChildController@store');
