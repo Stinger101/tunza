@@ -32,8 +32,8 @@ class CaregiverInvite extends Mailable
      */
     public function build()
     {
-        return $this->markdown('caregiverinvite')->subject('Invite to caregiver role')
-        ->with([
+      //->subject('Invite to caregiver role')
+        return $this->markdown('caregiverinvite')->with([
           "invite"=>$this->invite,
           "user"=>$this->user
         ]);
