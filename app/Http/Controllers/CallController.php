@@ -42,7 +42,7 @@ class CallController extends Controller
           "receiver_id"=>$request->receiver_id,
           "call_type"=>$request->call_type
         ]);
-        broadcast(new CallMade($update))->toOthers();
+        broadcast(new \App\Events\CallMade($update))->toOthers();
         return $call;//user chould then use this to join prescense channel
     }
 
@@ -78,7 +78,7 @@ class CallController extends Controller
     public function update(Request $request, Call $call)
     {
         //
-        
+
     }
 
     /**
