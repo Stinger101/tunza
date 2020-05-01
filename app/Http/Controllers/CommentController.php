@@ -47,7 +47,7 @@ class CommentController extends Controller
 
         ]);
         if(isset($request->attachment)){
-          $attachment_url=$request->file('attachment_url')->storeAs('communication/comments',$comment->id)
+          $attachment_url=$request->file('attachment_url')->storeAs('communication/comments',$comment->id);
           $attachment_type=pathinfo("storage_path".$attachment_url,PATHINFO_EXTENSION);
           $comment->attachment_url=$attachment_url;
           $comment->attachment_type=$attachment_url;
@@ -98,7 +98,7 @@ class CommentController extends Controller
         }
 
         if(isset($request->attachment)){
-          $attachment_url=$request->file('attachment_url')->storeAs('communication/comments',$comment_id->id)
+          $attachment_url=$request->file('attachment_url')->storeAs('communication/comments',$comment_id->id);
           $attachment_type=pathinfo("storage_path".$attachment_url,PATHINFO_EXTENSION);
           $comment_id->attachment_url=$attachment_url;
           $comment_id->attachment_type=$attachment_url;
