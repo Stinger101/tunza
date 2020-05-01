@@ -21,7 +21,7 @@ Route::middleware('auth:api')->post('/broadcast/auth',function (Request $request
   if(!\Auth::check()){
     return new Response("Forbidden",403);
   }
-  $pusher = new Pusher\Pusher(env('PUSHER_APP_KEY'),env('PUSHER_APP_SECRET'), env('PUSHER_APP_ID'));
+  $pusher = new Pusher\Pusher(env('PUSHER_APP_KEY'),env('PUSHER_APP_SECRET'), env('PUSHER_APP_ID'),['cluster'=>'eu','useTLS'=>true]);
   return $pusher->socket_auth($request->request->get('channel_name'),$request->request->get('socket_id'));
 });
 
