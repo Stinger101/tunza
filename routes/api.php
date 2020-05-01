@@ -13,15 +13,11 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::post("/register",function(Request $request){
-  return \App\Http\Controllers\Auth\RegisterController::apiCreate($request);
+Route::post("/register",'Auth\RegisterController::apiCreate';
 });
-Route::post("/login",function(Request $request){
-  return \App\Http\Controllers\Auth\LoginController::apiAuthenticate($request);
+Route::post("/login",'Auth\LoginController::apiAuthenticate';
 });
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::middleware('auth:api')->get('/user','UserController@show');
 //child
 Route::middleware('auth:api')->post('/user/add_child','ChildController@store');
 Route::middleware('auth:api')->get('/user/children', 'ChildController@index');
