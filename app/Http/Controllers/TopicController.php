@@ -53,7 +53,7 @@ class TopicController extends Controller
 
         ]);
         if(isset($request->attachment)){
-          $attachment_url=$request->file('attachment_url')->storeAs('communication/topics',$topic->id)
+          $attachment_url=$request->file('attachment_url')->storeAs('communication/topics',$topic->id);
           $attachment_type=pathinfo("storage_path".$attachment_url,PATHINFO_EXTENSION);
           $topic->attachment_url=$attachment_url;
           $topic->attachment_type=$attachment_url;
