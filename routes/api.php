@@ -13,10 +13,10 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::post("/register",'Auth\RegisterController::apiCreate';
-});
-Route::post("/login",'Auth\LoginController::apiAuthenticate';
-});
+Route::post("/register",'Auth\RegisterController::apiCreate');
+
+Route::post("/login",'Auth\LoginController::apiAuthenticate');
+
 Route::middleware('auth:api')->get('/user','UserController@show');
 //child
 Route::middleware('auth:api')->post('/user/add_child','ChildController@store');
