@@ -67,4 +67,4 @@ Route::middleware('auth:api')->post('/caregiver/invite/{invite_id}/update','Invi
 Route::middleware('auth:api')->get('/caregiver/children', 'ChildController@index');
 Route::middleware('auth:api')->get('/caregiver/child/{child_id}','ChildController@show');
 
-Route::middleware('auth:api')->get('/user/call','CallController@store');
+Route::middleware('auth:api')->post('/user/call','CallController@store');
