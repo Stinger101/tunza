@@ -56,7 +56,7 @@ class CaregiverController extends Controller
             "invited_on"=>\Carbon\Carbon::now(),
             "is_registered"=>true,
             "email_provided"=>$request->email_provided,
-            "user_id"=>\App\User::where("email",$request->email_provided)->get()[0]["user_id"],
+            "user_id"=>\App\User::where("email",$request->email_provided)->get()[0]['id'],
             "parent_id"=>\Auth::user()->id,
             "child_id"=>$child_id,
             "category_id"=>$request->category_id
