@@ -28,7 +28,7 @@ Route::middleware('auth:api')->post('/broadcast/auth',function (Request $request
 
   return response($callback.'('.$res.')')
             ->withHeaders([
-                'Content-Type' => "application/javascript",
+                'Content-Type' => "application/json",
             ]);
 });
 
