@@ -26,7 +26,7 @@ Route::middleware('auth:api')->post('/broadcast/auth',function (Request $request
   Log::info('{"auth":"'.substr(json_decode($res)->auth,1).'"}');
   $callback=str_replace('\\','',$request->callback);
 
-  return response(json_decode($res)->auth)
+  return response(json_encode(json_decode($res)->auth))
             ->withHeaders([
                 'Content-Type' => "application/json",
             ]);
