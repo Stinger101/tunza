@@ -23,8 +23,8 @@ Route::middleware('auth:api')->post('/broadcast/auth',function (Request $request
   }
   $pusher = new Pusher\Pusher(env('PUSHER_APP_KEY'),env('PUSHER_APP_SECRET'), env('PUSHER_APP_ID'),['cluster'=>'eu','useTLS'=>true]);
   $res=$pusher->socket_auth($request->channel_name,$request->socket_id);
-  Log::info($res);
-  return $res;
+  Log::info('{"auth":"'.substr(json_decode($res)->auth,1).'"}');
+  return return new Response('{"auth":"'.substr(json_decode($res)->auth,1).'"}',200);
 });
 
 Route::middleware('auth:api')->get('/user','UserController@show');
