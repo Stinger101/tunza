@@ -20,10 +20,11 @@ Route::post("/login",'Auth\LoginController@apiAuthenticate');
 
 Route::middleware('auth:api')->post('/broadcast/auth',function (Request $request){
   if(!\Auth::check()){
-    return new Response("Forbidden",404);
+    return new Response("Forbidden",403);
   }
   $pusher = new Pusher\Pusher(env('PUSHER_APP_KEY'),env('PUSHER_APP_SECRET'), env('PUSHER_APP_ID'),['cluster'=>'eu','useTLS'=>true]);
-  return (new PusherBroadcaster($pusher))->auth($request);
+  $pb=new PusherBroadcaster($pusher);
+  return $pb->auth($request);
 });
 
 Route::middleware('auth:api')->get('/user','UserController@show');
