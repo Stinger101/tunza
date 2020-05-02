@@ -22,6 +22,9 @@ Route::middleware('auth:api')->post('/broadcast/auth',function (Request $request
     return new Response("Forbidden",404);
   }
   $pusher = new Pusher\Pusher(env('PUSHER_APP_KEY'),env('PUSHER_APP_SECRET'), env('PUSHER_APP_ID'),['cluster'=>'eu','useTLS'=>true]);
+  Log::info(env('PUSHER_APP_KEY'));
+  Log::info(env('PUSHER_APP_SECRET'));
+  Log::info(env('PUSHER_APP_ID'));
   $res=$pusher->socket_auth($request->channel_name,$request->socket_id);
   Log::info('{"auth":"'.env('PUSHER_APP_KEY').json_decode($res)->auth.'"}');
   $callback=str_replace('\\','',$request->callback);
