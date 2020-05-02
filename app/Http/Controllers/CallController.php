@@ -39,7 +39,7 @@ class CallController extends Controller
         $call=Call::create([
           "call_url"=>$request->call_url,
           "caller_id"=>\Auth::user()->id,
-          "receiver_id"=>$request->receiver_id,
+          "receiver_id"=>(int)$request->receiver_id,
           "call_type"=>$request->call_type
         ]);
         broadcast(new \App\Events\CallMade($call))->toOthers();
