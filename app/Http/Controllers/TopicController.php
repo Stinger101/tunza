@@ -18,10 +18,10 @@ class TopicController extends Controller
     {
         //// TODO: filter by visibility
         if(request("search")!=null){
-          return Topic::where("child_id",$child_id)->get();
+          return Topic::where("child_id",$child_id)->with(["editor:id,name"])->withCount("comments")->get();
         }else{
           $search_key=request("search");
-          return Topic::where("child_id",$child_id)->where("topic","like","%{$search_key}%")->get();
+          return Topic::where("child_id",$child_id)->where("topic","like","%{$search_key}%")->withCount("comments")->with(["editor:id,name"])->get();
         }
 
 
@@ -71,7 +71,7 @@ class TopicController extends Controller
     public function show(Child $child_id, Topic $topic_id)
     {
         //
-        return Topic::find($topic_id->id)->with("comments")->get();
+        return Topic::find($topic_id->id)->withCount("comments")->get();
     }
 
     /**
