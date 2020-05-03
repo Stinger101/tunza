@@ -18,7 +18,7 @@ class CommentController extends Controller
     public function index(Child $child_id,Topic $topic_id)
     {
         //
-        return Comment::where("topic_id",$topic_id)->get();
+        return Comment::where("topic_id",$topic_id)->with(["editor:id,name"])->get();
     }
 
     /**
