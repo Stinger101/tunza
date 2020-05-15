@@ -53,10 +53,10 @@ class TopicController extends Controller
 
         ]);
         if(isset($request->attachment)){
-          $attachment_url=$request->file('attachment_url')->storeAs('communication/topics',$topic->id);
-          $attachment_type=pathinfo("storage_path".$attachment_url,PATHINFO_EXTENSION);
+          $attachment_url=$request->file('attachment')->storeAs('communication/topics',$topic_id->id);
+          $attachment_type=$request->attachment_type;
           $topic->attachment_url=$attachment_url;
-          $topic->attachment_type=$attachment_url;
+          $topic->attachment_type=$attachment_type;
           $topic->update();
         }
         return $topic;
@@ -100,10 +100,10 @@ class TopicController extends Controller
             $topic_id->topic=$request->topic;
           }
           if(isset($request->attachment)){
-            $attachment_url=$request->file('attachment_url')->storeAs('communication/topics',$topic_id->id);
-            $attachment_type=pathinfo("storage_path".$attachment_url,PATHINFO_EXTENSION);
+            $attachment_url=$request->file('attachment')->storeAs('communication/topics',$topic_id->id);
+            $attachment_type=$request->attachment_type;
             $topic_id->attachment_url=$attachment_url;
-            $topic_id->attachment_type=$attachment_url;
+            $topic_id->attachment_type=$attachment_type;
 
           }
           if(isset($request->status)){
