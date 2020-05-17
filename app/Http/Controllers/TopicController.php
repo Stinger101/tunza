@@ -53,7 +53,7 @@ class TopicController extends Controller
 
         ]);
         if(isset($request->attachment)){
-          $attachment_url=$request->file('attachment')->storeAs('communication/topics',$topic->id);
+          $attachment_url=$request->file('attachment')->storeAs('communication/topics',$topic->id.'.'.$request->file('attachment')->extension());
           $attachment_type=$request->attachment_type;
           $topic->attachment_url=$attachment_url;
           $topic->attachment_type=$attachment_type;
@@ -100,7 +100,7 @@ class TopicController extends Controller
             $topic_id->topic=$request->topic;
           }
           if(isset($request->attachment)){
-            $attachment_url=$request->file('attachment')->storeAs('communication/topics',$topic_id->id);
+            $attachment_url=$request->file('attachment')->storeAs('communication/topics',$topic_id->id.'.'.$request->file('attachment')->extension());
             $attachment_type=$request->attachment_type;
             $topic_id->attachment_url=$attachment_url;
             $topic_id->attachment_type=$attachment_type;
