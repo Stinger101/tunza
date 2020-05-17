@@ -29,3 +29,6 @@ Route::middleware('auth:api')->get('/avatar/users/{path_to_file}', function (Req
   }
 
 });
+Route::middleware('auth:api')->get('/communication/topics/{path_to_file}', function (Request $request,$path_to_file) {
+    return response()->file(storage_path('app/communication/topics/').$path_to_file);
+});
