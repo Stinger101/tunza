@@ -8,4 +8,7 @@ class Call extends Model
 {
     //
     protected $fillable=["call_url","time_received","time_ended","caller_id","receiver_id","call_type"];
+    public function receiver(){
+      return $this->belongsTo("App\User","receiver_id");
+    }
 }
