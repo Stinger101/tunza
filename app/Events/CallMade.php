@@ -10,6 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use App\Call;
+use Illuminate\Database\Eloquent\Collection;
 
 class CallMade implements ShouldBroadcastNow
 {
@@ -20,7 +21,7 @@ class CallMade implements ShouldBroadcastNow
      *
      * @return void
      */
-    public function __construct(Call $call)
+    public function __construct(Collection $call)
     {
         //
         $this->call=$call;
