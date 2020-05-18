@@ -24,7 +24,7 @@ class CallMade implements ShouldBroadcastNow
     public function __construct(Collection $call)
     {
         //
-        $this->call=$call;
+        $this->call=$call[0];
     }
 
     /**
@@ -34,6 +34,6 @@ class CallMade implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('user.'.$this->call->receiver_id);
+        return new PrivateChannel('user.'.$this->call['receiver_id']);
     }
 }
