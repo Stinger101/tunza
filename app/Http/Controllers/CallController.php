@@ -42,7 +42,7 @@ class CallController extends Controller
           "receiver_id"=>(int)$request->receiver_id,
           "call_type"=>$request->call_type
         ]);
-        broadcast(new \App\Events\CallMade($call->with("receiver:id,name")->get()))->toOthers();
+        broadcast(new \App\Events\CallMade(Call::find($call->id)->with("receiver:id,name")->get()))->toOthers();
         return $call;//user chould then use this to join prescense channel
     }
 
