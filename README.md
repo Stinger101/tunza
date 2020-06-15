@@ -1,4 +1,4 @@
-#Tunza application backend
+#Tunza application backend#
 this application is built using laravel 7.3. it supplies apis consumed by its various clients such as tunza_app(a flutter based mobile integration).
 Steps to configure:
 1. setup lamp stack on your server with php >7.3.
